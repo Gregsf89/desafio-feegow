@@ -10,11 +10,9 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('funcionario', function (Blueprint $table) {
-            $table->string('cpf', 11)->primary()->unique()->index();
-            $table->string('nome', 100);
-            $table->date('data_nascimento');
-            $table->timestampsTz();
+        Schema::create('tipo_vacinas', function (Blueprint $table): void {
+            $table->id();
+            $table->string('nome', 20);
         });
     }
 
@@ -23,6 +21,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('funcionario');
+        Schema::dropIfExists('tipo_vacinas');
     }
 };
