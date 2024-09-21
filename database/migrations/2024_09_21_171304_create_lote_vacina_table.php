@@ -13,10 +13,10 @@ return new class extends Migration {
         Schema::create('lote_vacinas', function (Blueprint $table): void {
             $table->ulid('id')->primary()->unique()->index();
             $table->foreignId('id_tipo_vacina')->constrained('tipo_vacinas')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->string('lote', 10);
+            $table->string('lote', 10)->index();
             $table->dateTimeTz('data_validade');
             $table->boolean('dose_unica');
-            $table->timestamps();
+            $table->timestampsTz();
         });
     }
 

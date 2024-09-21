@@ -11,7 +11,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('comorbidades', function (Blueprint $table): void {
-            $table->ulid('id')->primary()->unique()->index();
+            $table->id('id');
             $table->string('nome', 50);
         });
     }
