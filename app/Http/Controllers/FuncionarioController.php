@@ -51,10 +51,10 @@ class FuncionarioController extends Controller
      */
     public function getFuncionario(string $cpf): array
     {
-        // $funcionario = \App\Models\Funcionario::first();
-        $funcionario = \App\Models\Funcionario::factory()->hasComorbidades(3, function (array $attributes, \App\Models\Funcionario $funcionario): array {
-            return ['cpf_funcionario' => $funcionario->cpf];
-        })->create();
+        $funcionario = \App\Models\Funcionario::first();
+        // $funcionario = \App\Models\Funcionario::factory()->hasComorbidades(3, function (array $attributes, \App\Models\Funcionario $funcionario): array {
+        //     return ['cpf_funcionario' => $funcionario->cpf];
+        // })->create();
 
         return ['funcionario_info' => $funcionario->toArray()];
     }

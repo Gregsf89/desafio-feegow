@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\Helpers\HttpResponse;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
@@ -16,12 +17,14 @@ class ApiResponse
      */
     public function handle(Request $request, Closure $next): JsonResponse
     {
+        $response = $next($request);
+
         $return = [
+            'status_code' => $response->getStatusCode(),
+            'message' => HttpResponse::getMessage($response->getStatusCode()),
             'data' => null,
             'error' => null
         ];
-
-        $response = $next($request);
 
         if (!empty($response->original['code']) && isset($response->original['message']))
             $return['error'] = $response->original;

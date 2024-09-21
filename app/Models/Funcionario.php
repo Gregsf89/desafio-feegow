@@ -74,7 +74,7 @@ class Funcionario extends BaseModel
     protected function comorbidadesFuncionario(): Attribute
     {
         return Attribute::make(
-            get: fn() => $this->comorbidades = $this->comorbidades(),
+            get: fn() => $this->comorbidades = $this->comorbidades()->toArray(),
         );
     }
 }
