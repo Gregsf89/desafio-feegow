@@ -12,7 +12,7 @@ return new class extends Migration {
     {
         Schema::create('comorbidades', function (Blueprint $table): void {
             $table->id('id');
-            $table->string('nome', 50);
+            $table->string('nome', 60);
         });
     }
 
