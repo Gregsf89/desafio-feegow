@@ -17,6 +17,15 @@ class Comorbidade extends BaseModel
     public $timestamps = false;
 
     /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'laravel_through_key'
+    ];
+
+    /**
      * attributes that are mass assignable
      * @var array
      */

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 
 class LoteVacina extends BaseModel

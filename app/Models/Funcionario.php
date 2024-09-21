@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
+
 class Funcionario extends BaseModel
 {
     /**
@@ -63,6 +65,16 @@ class Funcionario extends BaseModel
      */
     public function comorbidades(): \Illuminate\Database\Eloquent\Relations\HasManyThrough
     {
-        return $this->hasManyThrough(Comorbidade::class, ComorbidadeFuncionario::class, 'cpf_funcionario', 'id_comorbidade', 'cpf', 'id');
+        return $this->hasManyThrough(Comorbidade::class, ComorbidadeFuncionario::class, 'cpf_funcionario', 'id', 'cpf', 'id_comorbidade');
+    }
+
+    /**
+     * Get the user's first name.
+     */
+    protected function comorbidadesFuncionario(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => $this->comorbidades = $this->comorbidades(),
+        );
     }
 }

@@ -17,6 +17,12 @@ class ComorbidadeFuncionario extends BaseModel
     protected $primaryKey = null;
 
     /**
+     * if the model uses timestamps
+     * @var bool
+     */
+    public $timestamps = false;
+
+    /**
      * attributes that are mass assignable
      * @var array
      */
