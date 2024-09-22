@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\FuncionarioResource;
+use App\Http\Resources\ResourceInterface;
+use App\Rules\ValidateCpf;
+use App\Services\FuncionarioServiceInterface;
 use Exception;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class FuncionarioController extends Controller
 {
     public function __construct(
+        private FuncionarioServiceInterface $serviceInterface
     ) {
     }
 
@@ -51,11 +55,29 @@ class FuncionarioController extends Controller
      */
     public function getFuncionario(string $cpf): array
     {
-        $funcionario = \App\Models\Funcionario::first();
-        // $funcionario = \App\Models\Funcionario::factory()->hasComorbidades(3, function (array $attributes, \App\Models\Funcionario $funcionario): array {
-        //     return ['cpf_funcionario' => $funcionario->cpf];
-        // })->create();
+        $data = [
+            'cpf' => $cpf
+        ];
 
-        return ['funcionario_info' => $funcionario->toArray()];
+        $validator = Validator::make(
+            $data,
+            [
+                'cpf' => [
+                    'required',
+                    'string',
+                    'size:11',
+                    new ValidateCpf()
+                ],
+            ],
+            $this->customMessages
+        );
+
+        if ($validator->fails())
+            throw new Exception($validator->errors(), 1000001);
+
+        return (new FuncionarioResource(
+            $this->serviceInterface->getFuncionarioByCpf($cpf)
+        ))
+            ->resolve();
     }
 }

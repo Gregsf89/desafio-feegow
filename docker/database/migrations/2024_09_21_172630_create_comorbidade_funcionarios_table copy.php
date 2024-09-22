@@ -14,7 +14,6 @@ return new class extends Migration {
             $table->ulid('cpf_funcionario');
             $table->foreignId('id_comorbidade')->constrained('comorbidades')->cascadeOnDelete()->cascadeOnUpdate();
 
-            $table->index(['cpf_funcionario', 'id_comorbidade'], 'comorbidade_funcionarios_cpf_funcionario_id_comorbidade_index');
             $table->foreign('cpf_funcionario')->references('cpf')->on('funcionarios')->cascadeOnDelete()->cascadeOnUpdate();
         });
     }

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Http\Helpers\CpfHelper;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,7 @@ class FuncionarioFactory extends Factory
     public function definition(): array
     {
         return [
-            'cpf' => $this->faker->unique()->numerify('###########'),
+            'cpf' => CpfHelper::generate(),
             'nome' => $this->faker->name() . ' ' . $this->faker->lastName(),
             'data_nascimento' => $this->faker->date('Y-m-d', '-18 years'),
             'created_at' => now(),

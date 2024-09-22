@@ -16,7 +16,6 @@ return new class extends Migration {
             $table->dateTimeTz('data_aplicacao');
             $table->timestampsTz();
 
-            $table->index(['cpf_funcionario', 'id_lote_vacina'], 'dose_vacinas_cpf_funcionario_id_lote_vacina_index');
             $table->foreign('cpf_funcionario')->references('cpf')->on('funcionarios')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreign('id_lote_vacina')->references('id')->on('lote_vacinas')->cascadeOnDelete()->cascadeOnUpdate();
         });

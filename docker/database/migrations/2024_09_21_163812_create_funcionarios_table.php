@@ -11,7 +11,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('funcionarios', function (Blueprint $table): void {
-            $table->string('cpf', 11)->primary()->unique()->index();
+            $table->string('cpf', 11)->primary()->unique();
             $table->string('nome', 100);
             $table->date('data_nascimento');
             $table->timestampsTz();

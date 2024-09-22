@@ -26,7 +26,7 @@ class ApiResponse
             'error' => null
         ];
 
-        if (!empty($response->original['code']) && isset($response->original['message']))
+        if (!empty($response->original['internal_error_code']) && isset($response->original['internal_message']))
             $return['error'] = $response->original;
         else if (!empty($response->original['error']['code']) && isset($response->original['error']['message']))
             $return['error'] = $response->original['error'];

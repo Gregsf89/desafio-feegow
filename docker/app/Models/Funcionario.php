@@ -60,21 +60,11 @@ class Funcionario extends BaseModel
     }
 
     /**
-     * Relationship with ComorbidadeFuncionario.
+     * Relationship with Comorbidade.
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function comorbidades(): \Illuminate\Database\Eloquent\Relations\HasManyThrough
     {
         return $this->hasManyThrough(Comorbidade::class, ComorbidadeFuncionario::class, 'cpf_funcionario', 'id', 'cpf', 'id_comorbidade');
-    }
-
-    /**
-     * Get the user's first name.
-     */
-    protected function comorbidadesFuncionario(): Attribute
-    {
-        return Attribute::make(
-            get: fn() => $this->comorbidades = $this->comorbidades()->toArray(),
-        );
     }
 }

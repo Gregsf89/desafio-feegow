@@ -11,9 +11,9 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('lote_vacinas', function (Blueprint $table): void {
-            $table->ulid('id')->primary()->unique()->index();
+            $table->ulid('id')->primary();
             $table->foreignId('id_tipo_vacina')->constrained('tipo_vacinas')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->string('lote', 10)->index();
+            $table->string('lote', 10);
             $table->dateTimeTz('data_validade');
             $table->boolean('dose_unica');
             $table->timestampsTz();
