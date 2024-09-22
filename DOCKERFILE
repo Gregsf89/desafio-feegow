@@ -1,0 +1,62 @@
+FROM php:8.2
+RUN apt-get update -y && apt-get install -y openssl zip unzip git libsodium-dev libcurl4-openssl-dev libpng-dev libicu-dev libonig-dev libzip-dev cron
+RUN export PATH=$PATH:/usr/sbin
+RUN rm -rf /var/lib/apt/lists/*
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+RUN docker-php-ext-install pdo 
+RUN docker-php-ext-install curl 
+RUN docker-php-ext-install fileinfo 
+RUN docker-php-ext-install intl
+RUN docker-php-ext-install pdo_mysql 
+RUN docker-php-ext-install zip 
+RUN docker-php-ext-install sodium
+RUN docker-php-ext-install gd
+
+WORKDIR /app
+COPY . /app
+RUN composer install
+RUN chmod 0644 /app/app.cron && crontab /app/app.cron
+RUN rm -d /app/.env 
+ENV APP_NAME=Laravel
+ENV APP_ENV=local
+ENV APP_KEY=base64:9ev9IMJ7jWzUSg90rEfNKRLbY9aylPpwjGnk5SO0FUM=
+ENV APP_DEBUG=true
+ENV APP_TIMEZONE=America/Sao_Paulo
+ENV APP_URL=http://localhost:8000
+ENV APP_LOCALE=en
+ENV APP_FALLBACK_LOCALE=en
+ENV APP_FAKER_LOCALE=en_US
+ENV APP_MAINTENANCE_DRIVER=file
+ENV BCRYPT_ROUNDS=12
+ENV LOG_CHANNEL=stack
+ENV LOG_STACK=single
+ENV LOG_DEPRECATIONS_CHANNEL=null
+ENV LOG_LEVEL=debug
+ENV DB_CONNECTION=mysql
+ENV DB_HOST=127.0.0.1
+ENV DB_PORT=3306
+ENV DB_DATABASE=desafio_feegow
+ENV DB_USERNAME=root
+ENV DB_PASSWORD=123456
+ENV SESSION_DRIVER=database
+ENV SESSION_LIFETIME=120
+ENV SESSION_ENCRYPT=false
+ENV SESSION_PATH=/
+ENV SESSION_DOMAIN=null
+ENV BROADCAST_CONNECTION=log
+ENV FILESYSTEM_DISK=local
+ENV QUEUE_CONNECTION=database
+ENV CACHE_STORE=database
+ENV CACHE_PREFIX=
+ENV MEMCACHED_HOST=127.0.0.1
+ENV REDIS_CLIENT=phpredis
+ENV REDIS_HOST=127.0.0.1
+ENV REDIS_PASSWORD=null
+ENV REDIS_PORT=6379
+ENV VITE_APP_NAME="${APP_NAME}"
+
+RUN php artisan optmize:clear
+
+CMD php artisan serve --port=8000 --host=0.0.0.0
+
+EXPOSE 8000
