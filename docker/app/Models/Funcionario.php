@@ -56,15 +56,40 @@ class Funcionario extends BaseModel
      */
     public function dosesVacina(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(DoseVacina::class, 'cpf_funcionario', 'cpf');
+        return $this->hasMany(DoseVacina::class, 'funcionario_cpf', 'cpf');
     }
 
     /**
      * Relationship with Comorbidade.
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function comorbidades(): \Illuminate\Database\Eloquent\Relations\HasManyThrough
+    public function comorbidades(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->hasManyThrough(Comorbidade::class, ComorbidadeFuncionario::class, 'cpf_funcionario', 'id', 'cpf', 'id_comorbidade');
+        return $this->belongsToMany(
+            Comorbidade::class,
+            ComorbidadeFuncionario::class,
+            'funcionario_cpf',
+            'comorbidade_id',
+            'cpf',
+            'id'
+        );
+    }
+
+    /**
+     * Relationship with LoteVacina.
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function loteVacinas(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(
+            LoteVacina::class,
+            DoseVacina::class,
+            'funcionario_cpf',
+            'lote_vacina_id',
+            'cpf',
+            'id'
+        )
+            ->withPivotValue(['dose', 'data_aplicacao'])
+            ->withTimestamps();
     }
 }

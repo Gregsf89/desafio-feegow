@@ -21,8 +21,9 @@ class DoseVacina extends BaseModel
      * @var array
      */
     protected $fillable = [
-        'cpf_funcionario',
-        'id_lote_vacina',
+        'funcionario_cpf',
+        'lote_vacina_id',
+        'dose',
         'data_aplicacao'
     ];
 
@@ -31,8 +32,9 @@ class DoseVacina extends BaseModel
      * @var array<string>
      */
     protected $casts = [
-        'cpf_funcionario' => 'string',
-        'id_lote_vacina' => 'string',
+        'funcionario_cpf' => 'string',
+        'lote_vacina_id' => 'string',
+        'dose' => 'string',
         'data_aplicacao' => 'date'
     ];
 
@@ -42,7 +44,7 @@ class DoseVacina extends BaseModel
      */
     public function funcionario(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(Funcionario::class, 'cpf_funcionario', 'cpf');
+        return $this->belongsTo(Funcionario::class, 'funcionario_cpf', 'cpf');
     }
 
     /**
@@ -51,6 +53,6 @@ class DoseVacina extends BaseModel
      */
     public function loteVacina(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(LoteVacina::class, 'id_lote_vacina', 'id');
+        return $this->belongsTo(LoteVacina::class, 'lote_vacina_id', 'id');
     }
 }

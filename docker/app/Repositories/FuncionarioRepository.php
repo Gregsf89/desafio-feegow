@@ -9,10 +9,20 @@ class FuncionarioRepository extends BaseRepository implements FuncionarioReposit
     /**
      * getFuncionarioByCpf
      * @param string $cpf
-     * @return null|\App\Models\Funcionario
+     * @return null|Funcionario
      */
     public function getFuncionarioByCpf(string $cpf): ?Funcionario
     {
         return Funcionario::where('cpf', $cpf)->first();
+    }
+
+    /**
+     * createFuncionarioByCpf
+     * @param array $data
+     * @return Funcionario
+     */
+    public function create(array $data): Funcionario
+    {
+        return Funcionario::create($data)->fresh();
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Str;
 
 class FuncionarioResource extends JsonResource
 {
@@ -20,12 +21,20 @@ class FuncionarioResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return [
-            self::$wrap => [
-                'nome' => $this->nome,
-                'cpf' => $this->cpf,
-                'data_nascimento' => $this->data_nascimento->format('Y-m-d'),
-            ]
-        ];
+        if ($request->getContent() == null)
+            return ['funcionario_nao_encontrado'];
+        else
+            return [
+                self::$wrap => [
+                    'nome' => $this->nome,
+                    'cpf' => Str::mask($this->cpf, '*', 3),
+                    'data_nascimento' => $this->data_nascimento->format('Y-m-d'),
+                    'comorbidade' => $this->comorbidades->isNotEmpty(),
+                    'vacinado' => $this->dosesVacina->isNotEmpty(),
+                    'primeira_dose' => $this->dosesVacina->where('dose', '1')->first()?->data_aplicacao->format('Y-m-d'),
+                    'segunda_dose' => $this->dosesVacina->where('dose', '2')->first()?->data_aplicacao->format('Y-m-d'),
+                    'terceira_dose' => $this->dosesVacina->where('dose', '3')->first()?->data_aplicacao->format('Y-m-d'),
+                ]
+            ];
     }
 }

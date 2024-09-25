@@ -11,10 +11,11 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('comorbidade_funcionarios', function (Blueprint $table): void {
-            $table->ulid('cpf_funcionario');
-            $table->foreignId('id_comorbidade')->constrained('comorbidades')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->ulid('funcionario_cpf');
+            $table->foreignId('comorbidade_id')->constrained('comorbidades')->cascadeOnDelete()->cascadeOnUpdate();
 
-            $table->foreign('cpf_funcionario')->references('cpf')->on('funcionarios')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->unique(['funcionario_cpf', 'comorbidade_id']);
+            $table->foreign('funcionario_cpf')->references('cpf')->on('funcionarios')->cascadeOnDelete()->cascadeOnUpdate();
         });
     }
 

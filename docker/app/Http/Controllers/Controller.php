@@ -27,7 +27,7 @@ abstract class Controller extends BaseController
 
     /**
      * @OA\Get(
-     *     path="/api/documentation",
+     *     path="/api/v1/documentation",
      *     @OA\Response(response="200", description="base docs endpoint")
      * )
      */

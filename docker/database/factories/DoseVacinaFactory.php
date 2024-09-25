@@ -19,9 +19,10 @@ class DoseVacinaFactory extends Factory
     public function definition(): array
     {
         return [
-            'cpf_funcionario' => Funcionario::make()->cpf,
-            'id_lote_vacina' => LoteVacina::make()->id,
-            'data_aplicacao' => $this->faker->date('Y-m-d', '-5 years'),
+            'funcionario_cpf' => Funcionario::factory()->create()->cpf,
+            'lote_vacina_id' => LoteVacina::factory()->create()->id,
+            'data_aplicacao' => $this->faker->dateTimeBetween('-3 years', 'now'),
+            'dose' => $this->faker->randomElement(['1', '2', '3']),
             'created_at' => now(),
             'updated_at' => now()
         ];

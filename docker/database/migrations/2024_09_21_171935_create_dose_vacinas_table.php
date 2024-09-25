@@ -11,13 +11,15 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('dose_vacinas', function (Blueprint $table): void {
-            $table->string('cpf_funcionario', 11);
-            $table->ulid('id_lote_vacina');
+            $table->string('funcionario_cpf', 11);
+            $table->ulid('lote_vacina_id');
+            $table->enum('dose', ['1', '2', '3']);
             $table->dateTimeTz('data_aplicacao');
             $table->timestampsTz();
 
-            $table->foreign('cpf_funcionario')->references('cpf')->on('funcionarios')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreign('id_lote_vacina')->references('id')->on('lote_vacinas')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->unique(['funcionario_cpf', 'dose']);
+            $table->foreign('funcionario_cpf')->references('cpf')->on('funcionarios')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreign('lote_vacina_id')->references('id')->on('lote_vacinas')->cascadeOnDelete()->cascadeOnUpdate();
         });
     }
 

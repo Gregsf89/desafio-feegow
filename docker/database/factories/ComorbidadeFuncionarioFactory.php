@@ -19,8 +19,8 @@ class ComorbidadeFuncionarioFactory extends Factory
     public function definition(): array
     {
         return [
-            'cpf_funcionario' => Funcionario::factory()->create()->cpf,
-            'id_comorbidade' => Comorbidade::inRandomOrder()->first()->id,
+            'funcionario_cpf' => Funcionario::factory()->create()->cpf,
+            'comorbidade_id' => Comorbidade::inRandomOrder()->first()->id,
         ];
     }
 }

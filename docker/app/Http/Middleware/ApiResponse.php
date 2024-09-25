@@ -21,17 +21,15 @@ class ApiResponse
 
         $return = [
             'status_code' => $response->getStatusCode(),
-            'message' => HttpResponse::getMessage($response->getStatusCode()),
+            'message' => \Symfony\Component\HttpFoundation\Response::$statusTexts[$response->getStatusCode()],
             'data' => null,
             'error' => null
         ];
 
-        if (!empty($response->original['internal_error_code']) && isset($response->original['internal_message']))
-            $return['error'] = $response->original;
-        else if (!empty($response->original['error']['code']) && isset($response->original['error']['message']))
-            $return['error'] = $response->original['error'];
+        if ($response->getOriginalContent()['error'])
+            $return['error'] = $response->getOriginalContent()['error'];
         else
-            $return['data'] = $response->original;
+            $return['data'] = $response->getOriginalContent();
 
         return response()->json($return, $response->getStatusCode());
     }

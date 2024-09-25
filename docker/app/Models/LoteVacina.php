@@ -31,8 +31,8 @@ class LoteVacina extends BaseModel
      * @var array
      */
     protected $fillable = [
-        'id_tipo_vacina',
-        'validade',
+        'tipo_vacina_id',
+        'data_validade',
         'lote',
         'dose_unica'
     ];
@@ -43,8 +43,8 @@ class LoteVacina extends BaseModel
      */
     protected $casts = [
         'id' => 'string',
-        'id_tipo_vacina' => 'integer',
-        'validade' => 'date',
+        'tipo_vacina_id' => 'integer',
+        'data_validade' => 'date',
         'lote' => 'string',
         'dose_unica' => 'boolean'
     ];
@@ -55,6 +55,33 @@ class LoteVacina extends BaseModel
      */
     public function tipoVacina(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(TipoVacina::class, 'id_tipo_vacina', 'id');
+        return $this->belongsTo(TipoVacina::class, 'tipo_vacina_id', 'id');
+    }
+
+    /**
+     * Relationship with DoseVacina.
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function dosesVacina(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(DoseVacina::class, 'lote_vacina_id', 'id');
+    }
+
+    /**
+     * Relationship with Funcionario.
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function funcionarios(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(
+            Funcionario::class,
+            DoseVacina::class,
+            'lote_vacina_id',
+            'funcionario_cpf',
+            'id',
+            'cpf'
+        )
+            ->withPivotValue(['dose', 'data_aplicacao'])
+            ->withTimestamps();
     }
 }

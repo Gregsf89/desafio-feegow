@@ -27,8 +27,8 @@ class ComorbidadeFuncionario extends BaseModel
      * @var array
      */
     protected $fillable = [
-        'cpf_funcionario',
-        'id_comorbidade'
+        'funcionario_cpf',
+        'comorbidade_id'
     ];
 
     /**
@@ -36,8 +36,8 @@ class ComorbidadeFuncionario extends BaseModel
      * @var array<string>
      */
     protected $casts = [
-        'cpf_funcionario' => 'string',
-        'id_comorbidade' => 'integer'
+        'funcionario_cpf' => 'string',
+        'comorbidade_id' => 'integer'
     ];
 
     /**
@@ -46,7 +46,7 @@ class ComorbidadeFuncionario extends BaseModel
      */
     public function funcionario(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(Funcionario::class, 'cpf_funcionario', 'cpf');
+        return $this->belongsTo(Funcionario::class, 'funcionario_cpf', 'cpf');
     }
 
     /**
@@ -55,6 +55,6 @@ class ComorbidadeFuncionario extends BaseModel
      */
     public function comorbidade(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(Comorbidade::class, 'id_comorbidade', 'id');
+        return $this->belongsTo(Comorbidade::class, 'comorbidade_id', 'id');
     }
 }
