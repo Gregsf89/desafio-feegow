@@ -33,7 +33,7 @@ class MassPopulateDatabaseCommand extends Command
             (int) $this->option('doseQnt')
         );
 
-        Artisan::call('queue:work --tries=1');
+        Artisan::command('queue:work --stop-when-empty', fn() => null);
 
         return;
     }

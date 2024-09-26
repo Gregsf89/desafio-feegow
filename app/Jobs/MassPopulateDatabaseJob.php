@@ -5,11 +5,11 @@ namespace App\Jobs;
 use App\Models\DoseVacina;
 use App\Models\Funcionario;
 use App\Models\LoteVacina;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
+use Illuminate\Support\Str;
 
-class MassPopulateDatabaseJob implements ShouldQueue, ShouldBeUnique
+class MassPopulateDatabaseJob implements ShouldQueue
 {
     use Queueable;
 
@@ -39,14 +39,14 @@ class MassPopulateDatabaseJob implements ShouldQueue, ShouldBeUnique
             $rnd = mt_rand(1, 3);
             $cpf = Funcionario::inRandomOrder()->first()->cpf;
 
-            for ($i = 1; $i < $rnd; $i++)
+            for ($i = 1; $i <= $rnd; $i++)
                 DoseVacina::updateOrCreate([
                     'funcionario_cpf' => $cpf,
                     'dose' => $i
                 ], [
                     'lote_vacina_id' => LoteVacina::inRandomOrder()->first()->id,
                     'data_aplicacao' => now()
-                ]);
+                ])->fresh();
             $d++;
         } while ($d < $this->doseVacinaQnt);
     }
