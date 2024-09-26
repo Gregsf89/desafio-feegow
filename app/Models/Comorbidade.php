@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-class Comorbidade extends BaseModel
+class Comorbidade extends \Illuminate\Database\Eloquent\Model
 {
     /**
      * table name
@@ -18,7 +18,6 @@ class Comorbidade extends BaseModel
 
     /**
      * The attributes that should be hidden for arrays.
-     *
      * @var array
      */
     protected $hidden = [

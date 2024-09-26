@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Contracts\ComorbidadeServiceInterface;
 use App\Contracts\TipoVacinaServiceInterface;
-use App\Http\Resources\ComorbidadeResource;
-use App\Http\Resources\TipoVacinaResource;
 
 class ResourceController extends Controller
 {
@@ -44,10 +42,8 @@ class ResourceController extends Controller
      */
     public function getComorbidadeList(): array
     {
-        return \App\Models\Comorbidade::withoutRelations()->all()->toArray();
-        return //ComorbidadeResource::collection(
-            $this->comorbidadeServiceInterface->getAll();
-        // );
+        return $this->comorbidadeServiceInterface->getAll();
+
     }
 
     /**
@@ -79,8 +75,6 @@ class ResourceController extends Controller
      */
     public function getTipoVacinaList(): array
     {
-        return TipoVacinaResource::collection(
-            $this->tipoVacinaServiceInterface->getAll()
-        );
+        return $this->tipoVacinaServiceInterface->getAll();
     }
 }

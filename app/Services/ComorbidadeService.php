@@ -2,13 +2,13 @@
 
 namespace App\Services;
 
+use App\Contracts\ComorbidadeRepositoryInterface;
 use App\Contracts\ComorbidadeServiceInterface;
-use Illuminate\Database\Eloquent\Collection;
 
 class ComorbidadeService extends BaseService implements ComorbidadeServiceInterface
 {
     public function __construct(
-        private readonly ComorbidadeServiceInterface $repositoryInterface
+        private readonly ComorbidadeRepositoryInterface $repositoryInterface
     ) {
     }
 

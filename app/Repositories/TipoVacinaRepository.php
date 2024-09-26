@@ -4,16 +4,15 @@ namespace App\Repositories;
 
 use App\Contracts\TipoVacinaRepositoryInterface;
 use App\Models\TipoVacina;
-use Illuminate\Database\Eloquent\Collection;
 
 class TipoVacinaRepository extends BaseRepository implements TipoVacinaRepositoryInterface
 {
     /**
      * Return all TipoVacina models
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @return array
      */
-    public function getAll(): Collection
+    public function getAll(): array
     {
-        return TipoVacina::all();
+        return TipoVacina::all()->toArray();
     }
 }

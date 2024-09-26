@@ -6,7 +6,6 @@ use App\Contracts\LoteVacinaServiceInterface;
 use App\Http\Requests\CreateLoteVacinaRequest;
 use App\Http\Requests\GetLoteVacinaRequest;
 use App\Http\Resources\LoteVacinaResource;
-use Illuminate\Http\Request;
 
 class LoteVacinaController extends Controller
 {

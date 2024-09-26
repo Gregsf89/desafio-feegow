@@ -2,13 +2,11 @@
 
 namespace App\Contracts;
 
-use Illuminate\Database\Eloquent\Collection;
-
 interface TipoVacinaRepositoryInterface
 {
     /**
      * Return all TipoVacina models
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @return array
      */
-    public function getAll(): Collection;
+    public function getAll(): array;
 }

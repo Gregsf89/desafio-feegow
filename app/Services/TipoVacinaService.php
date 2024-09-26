@@ -2,21 +2,21 @@
 
 namespace App\Services;
 
+use App\Contracts\TipoVacinaRepositoryInterface;
 use App\Contracts\TipoVacinaServiceInterface;
-use Illuminate\Database\Eloquent\Collection;
 
 class TipoVacinaService extends BaseService implements TipoVacinaServiceInterface
 {
     public function __construct(
-        private readonly TipoVacinaServiceInterface $repositoryInterface
+        private readonly TipoVacinaRepositoryInterface $repositoryInterface
     ) {
     }
 
     /**
      * Return all LoteVacina models
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @return array
      */
-    public function getAll(): Collection
+    public function getAll(): array
     {
         return $this->repositoryInterface->getAll();
     }

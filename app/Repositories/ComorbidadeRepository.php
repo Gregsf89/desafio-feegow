@@ -4,7 +4,6 @@ namespace App\Repositories;
 
 use App\Contracts\ComorbidadeRepositoryInterface;
 use App\Models\Comorbidade;
-use Illuminate\Database\Eloquent\Collection;
 
 class ComorbidadeRepository extends BaseRepository implements ComorbidadeRepositoryInterface
 {

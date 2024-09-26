@@ -8,8 +8,9 @@ use App\Models\Funcionario;
 
 class FuncionarioService extends BaseService implements FuncionarioServiceInterface
 {
-    public function __construct(private readonly FuncionarioRepositoryInterface $repositoryInterface)
-    {
+    public function __construct(
+        private readonly FuncionarioRepositoryInterface $repositoryInterface
+    ) {
     }
 
     /**

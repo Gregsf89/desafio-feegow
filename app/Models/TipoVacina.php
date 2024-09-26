@@ -17,7 +17,7 @@ class TipoVacina extends BaseModel
     public $timestamps = false;
 
     /**
-     * attributes that are mass assignable
+     * attributes that are mass assignable     * 
      * @var array
      */
     protected $fillable = [
