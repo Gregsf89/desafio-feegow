@@ -6,7 +6,7 @@ interface ComorbidadeServiceInterface
 {
     /**
      * Return all Comorbidade models
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @return array
      */
     public function getAll(): array;
 }

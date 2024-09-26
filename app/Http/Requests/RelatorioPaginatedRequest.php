@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use App\Traits\ValidateUrlParams;
 use Illuminate\Foundation\Http\FormRequest;
 
-class GetLoteVacinaRequest extends FormRequest
+class RelatorioPaginatedRequest extends FormRequest
 {
     use ValidateUrlParams;
 
@@ -25,7 +25,9 @@ class GetLoteVacinaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id' => 'required|ulid|exists:lote_vacinas,id'
+            'page' => 'nullable|integer|min:1',
+            'limit' => 'nullable|integer|min:1|max:100',
+            'vacinated' => 'nullable|boolean'
         ];
     }
 }

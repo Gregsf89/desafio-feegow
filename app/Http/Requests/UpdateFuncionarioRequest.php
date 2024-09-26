@@ -3,11 +3,14 @@
 namespace App\Http\Requests;
 
 use App\Rules\ValidateCpf;
+use App\Traits\ValidateUrlParams;
 use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateFuncionarioRequest extends FormRequest
 {
+    use ValidateUrlParams;
+
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -30,7 +33,7 @@ class UpdateFuncionarioRequest extends FormRequest
                 'size:11',
                 new ValidateCpf()
             ],
-            'nome' => 'required|string|regex:/^\w+(?: \w+)+/',
+            'nome' => 'required|string|regex:/\w+(?: \w+)+/',
             'data_nascimento' => 'required|date_format:Y-m-d|before:' . Carbon::now()->subYears(18)->format('Y-m-d'),
             'comorbidade_ids' => 'nullable|array',
             'comorbidade_ids.*' => 'nullable|integer|exists:comorbidades,id',
@@ -45,22 +48,5 @@ class UpdateFuncionarioRequest extends FormRequest
             'doses_vacina_info.*.dose' => 'nullable|numeric|in:1,2,3',
             'doses_vacina_info.*.data_aplicacao' => 'nullable|date_format:Y-m-d|before_or_equal:' . Carbon::now()->format('Y-m-d')
         ];
-    }
-
-    /**
-     * Get data to be validated from the request. From Route URL
-     *
-     * @return array
-     */
-    public function validationData(): array
-    {
-        if (method_exists($this->route(), 'parameters')) {
-            $this->request->add($this->route()->parameters());
-            $this->query->add($this->route()->parameters());
-
-            return array_merge($this->route()->parameters(), $this->all());
-        }
-
-        return $this->all();
     }
 }

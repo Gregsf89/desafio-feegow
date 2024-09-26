@@ -30,7 +30,7 @@ class CreateFuncionarioRequest extends FormRequest
                 'size:11',
                 new ValidateCpf()
             ],
-            'nome' => 'required|string|regex:/^\w+(?: \w+)+/',
+            'nome' => 'required|string|regex:/\w+(?: \w+)+/',
             'data_nascimento' => 'required|date_format:Y-m-d|before:' . Carbon::now()->subYears(18)->format('Y-m-d'),
             'comorbidade_ids' => 'nullable|array',
             'comorbidade_ids.*' => 'nullable|integer|exists:comorbidades,id',

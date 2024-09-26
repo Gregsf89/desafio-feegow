@@ -3,10 +3,13 @@
 namespace App\Http\Requests;
 
 use App\Rules\ValidateCpf;
+use App\Traits\ValidateUrlParams;
 use Illuminate\Foundation\Http\FormRequest;
 
 class GetFuncionarioRequest extends FormRequest
 {
+    use ValidateUrlParams;
+
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -31,22 +34,5 @@ class GetFuncionarioRequest extends FormRequest
                 new ValidateCpf()
             ]
         ];
-    }
-
-    /**
-     * Get data to be validated from the request. From Route URL
-     *
-     * @return array
-     */
-    public function validationData(): array
-    {
-        if (method_exists($this->route(), 'parameters')) {
-            $this->request->add($this->route()->parameters());
-            $this->query->add($this->route()->parameters());
-
-            return array_merge($this->route()->parameters(), $this->all());
-        }
-
-        return $this->all();
     }
 }
