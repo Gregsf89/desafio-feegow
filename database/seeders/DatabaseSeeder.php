@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
             TipoVacinaSeeder::class,
             ComorbidadeSeeder::class,
             FuncionarioSeeder::class,
-            LoteVacinaSeeder::class,
+            LotevacinaSeeder::class,
         ];
 
         $this->call($seeders);
