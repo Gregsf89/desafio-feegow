@@ -2,7 +2,6 @@
 
 namespace App\Http\Middleware;
 
-use App\Http\Helpers\HttpResponse;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
@@ -19,18 +18,18 @@ class ApiResponse
     {
         $response = $next($request);
 
-        $return = [
+        $body = [
             'status_code' => $response->getStatusCode(),
             'message' => \Symfony\Component\HttpFoundation\Response::$statusTexts[$response->getStatusCode()],
             'data' => null,
             'error' => null
         ];
 
-        if ($response->getOriginalContent()['error'])
-            $return['error'] = $response->getOriginalContent()['error'];
+        if (isset($response->getOriginalContent()['error']))
+            $body['error'] = $response->getOriginalContent()['error'];
         else
-            $return['data'] = $response->getOriginalContent();
+            $body['data'] = $response->getOriginalContent();
 
-        return response()->json($return, $response->getStatusCode());
+        return response()->json($body, $response->getStatusCode());
     }
 }

@@ -11,9 +11,8 @@ class BusinessServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind(\App\Services\DoseVacinaServiceInterface::class, \App\Services\DoseVacinaService::class);
-        $this->app->bind(\App\Services\FuncionarioServiceInterface::class, \App\Services\FuncionarioService::class);
-        $this->app->bind(\App\Services\LoteVacinaServiceInterface::class, \App\Services\LoteVacinaService::class);
+        $this->app->bind(\App\Contracts\FuncionarioServiceInterface::class, \App\Services\FuncionarioService::class);
+        $this->app->bind(\App\Contracts\LoteVacinaServiceInterface::class, \App\Services\LoteVacinaService::class);
     }
 
     /**

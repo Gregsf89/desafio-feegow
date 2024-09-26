@@ -21,7 +21,7 @@ class FuncionarioResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        if ($request->getContent() == null)
+        if (empty($this))
             return ['funcionario_nao_encontrado'];
         else
             return [

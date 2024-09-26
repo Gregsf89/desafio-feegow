@@ -81,7 +81,7 @@ class LoteVacina extends BaseModel
             'id',
             'cpf'
         )
-            ->withPivotValue(['dose', 'data_aplicacao'])
+            ->withPivot(['dose', 'data_aplicacao'])
             ->withTimestamps();
     }
 }

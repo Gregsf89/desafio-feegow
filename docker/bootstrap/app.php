@@ -22,7 +22,7 @@ return Application::configure(basePath: dirname(__DIR__))
             if ($request->is('api/*')) {
                 $message = $e->getMessage();
 
-                return response()->json(['error' => $message], $e->status);
+                return response()->json(['error' => $message], $e->status ?? 500);
             } elseif ($e instanceof \Symfony\Component\HttpKernel\Exception\NotFoundHttpException)
                 return response()->view('errors.404', [], 404);
         });

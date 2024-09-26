@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Contracts\FuncionarioRepositoryInterface;
 use App\Models\Funcionario;
 
 class FuncionarioRepository extends BaseRepository implements FuncionarioRepositoryInterface
@@ -13,16 +14,17 @@ class FuncionarioRepository extends BaseRepository implements FuncionarioReposit
      */
     public function getFuncionarioByCpf(string $cpf): ?Funcionario
     {
-        return Funcionario::where('cpf', $cpf)->first();
+        return Funcionario::find($cpf);
     }
 
     /**
      * createFuncionarioByCpf
-     * @param array $data
+     * @param array $anchor
+     * @param array $payload
      * @return Funcionario
      */
-    public function create(array $data): Funcionario
+    public function create(array $anchor, array $payload): Funcionario
     {
-        return Funcionario::create($data)->fresh();
+        return Funcionario::updateOrCreate($anchor, $payload)->fresh();
     }
 }

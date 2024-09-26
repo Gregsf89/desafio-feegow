@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Services;
+namespace App\Contracts;
 
 use App\Models\LoteVacina;
 
-interface LoteVacinaServiceInterface
+interface LoteVacinaRepositoryInterface
 {
     /**
-     * Create a new LoteVacina model and persist it
+     * Creates a new LoteVacina model and persists it
      * @param array $data
      * @return LoteVacina
      */

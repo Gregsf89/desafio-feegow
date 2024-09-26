@@ -2,17 +2,18 @@
 
 namespace App\Repositories;
 
+use App\Contracts\LoteVacinaRepositoryInterface;
 use App\Models\LoteVacina;
 
 class LoteVacinaRepository extends BaseRepository implements LoteVacinaRepositoryInterface
 {
     /**
-     * getFuncionarioByCpf
+     * Creates a new LoteVacina model and persists it
      * @param array $data
-     * @return null|LoteVacina
+     * @return LoteVacina
      */
     public function create(array $data): LoteVacina
     {
-        return LoteVacina::create($data)->fresh();
+        return LoteVacina::updateOrCreate($data, $data)->fresh();
     }
 }

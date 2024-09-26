@@ -2,25 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\FuncionarioServiceInterface;
+use App\Contracts\LoteVacinaServiceInterface;
 use App\Http\Requests\CreateFuncionarioRequest;
+use App\Http\Requests\GetFuncionarioRequest;
 use App\Http\Resources\FuncionarioResource;
-use App\Rules\ValidateCpf;
-use App\Services\FuncionarioServiceInterface;
-use Carbon\Carbon;
-use Exception;
-use Illuminate\Database\Eloquent\Factories\Sequence;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 class FuncionarioController extends Controller
 {
     public function __construct(
-        private FuncionarioServiceInterface $serviceInterface
+        private readonly FuncionarioServiceInterface $serviceInterface,
+        private readonly LoteVacinaServiceInterface $loteVacinaServiceInterface
     ) {
     }
 
     /**
-     *  @OA\Get(
+     * @OA\Get(
      *  path="/api/funcionario/{cpf}",
      *  parameters={{
      *      "name": "cpf",
@@ -58,30 +55,14 @@ class FuncionarioController extends Controller
      *      )
      *  ))
      */
-    public function getFuncionario(string $cpf): array
+    public function getFuncionario(GetFuncionarioRequest $request): array
     {
-        $data = [
-            'cpf' => $cpf
-        ];
-
-        $validator = Validator::make(
-            $data,
-            [
-                'cpf' => [
-                    'required',
-                    'string',
-                    'size:11',
-                    new ValidateCpf()
-                ],
-            ],
-            $this->customMessages
-        );
-
-        if ($validator->fails())
-            throw new Exception($validator->errors(), 1000001);
+        $data = $request->safe()->only([
+            'cpf'
+        ]);
 
         return (new FuncionarioResource(
-            $this->serviceInterface->getFuncionarioByCpf($cpf)
+            $this->serviceInterface->getFuncionarioByCpf($data['cpf'])
         ))->resolve();
     }
 
@@ -149,24 +130,19 @@ class FuncionarioController extends Controller
             'cpf',
             'nome',
             'data_nascimento',
-            'comorbidades',
+            'comorbidade_ids',
             'doses_vacina_info'
         ]);
 
-        if (isset($data['comorbidades']) && is_array($data['comorbidades']) && !empty($data['comorbidades'])) {
-            $comorbidadesData = $data['comorbidades'] ?? null;
-            unset($data['comorbidades']);
-        }
-
-        if (isset($data['doses_vacina_info']) && is_array($data['doses_vacina_info']) && !empty($data['doses_vacina_info'])) {
-            $dosesVacinaData = $data['doses_vacina_info'] ?? null;
+        if (isset($data['doses_vacina_info'])) {
+            $dosesVacinaInfo = $this->loteVacinaServiceInterface->createLoteFromFuncionario($data['doses_vacina_info']);
             unset($data['doses_vacina_info']);
         }
-        dd(1);
 
         return (new FuncionarioResource(
             $this->serviceInterface->create(
-                $data
+                $data,
+                $dosesVacinaInfo ?? []
             )
         ))->resolve();
     }

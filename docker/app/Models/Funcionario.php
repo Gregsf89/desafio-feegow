@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Casts\Attribute;
-
 class Funcionario extends BaseModel
 {
     /**
@@ -89,7 +87,7 @@ class Funcionario extends BaseModel
             'cpf',
             'id'
         )
-            ->withPivotValue(['dose', 'data_aplicacao'])
+            ->withPivot(['dose', 'data_aplicacao'])
             ->withTimestamps();
     }
 }

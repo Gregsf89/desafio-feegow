@@ -41,4 +41,20 @@ class Comorbidade extends BaseModel
         'id' => 'integer',
         'nome' => 'string'
     ];
+
+    /**
+     * Relationship with Funcionario.
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function funcionarios(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(
+            Funcionario::class,
+            ComorbidadeFuncionario::class,
+            'comorbidade_id',
+            'funcionario_cpf',
+            'id',
+            'cpf'
+        );
+    }
 }

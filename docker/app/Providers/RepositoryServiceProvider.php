@@ -11,10 +11,8 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind(\App\Repositories\DoseVacinaRepositoryInterface::class, \App\Repositories\DoseVacinaRepository::class);
-        $this->app->bind(\App\Repositories\FuncionarioRepositoryInterface::class, \App\Repositories\FuncionarioRepository::class);
-        $this->app->bind(\App\Repositories\LoteVacinaRepositoryInterface::class, \App\Repositories\LoteVacinaRepository::class);
-        $this->app->bind(\App\Repositories\ComorbidadeRepositoryInterface::class, \App\Repositories\ComorbidadeRepository::class);
+        $this->app->bind(\App\Contracts\FuncionarioRepositoryInterface::class, \App\Repositories\FuncionarioRepository::class);
+        $this->app->bind(\App\Contracts\LoteVacinaRepositoryInterface::class, \App\Repositories\LoteVacinaRepository::class);
     }
 
     /**

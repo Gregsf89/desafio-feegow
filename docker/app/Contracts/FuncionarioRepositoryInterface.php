@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Contracts;
 
 use App\Models\Funcionario;
 
@@ -15,8 +15,9 @@ interface FuncionarioRepositoryInterface
 
     /**
      * Create a new Funcionario model and persist it
-     * @param array $data
+     * @param array $anchor
+     * @param array $payload
      * @return Funcionario
      */
-    public function create(array $data): Funcionario;
+    public function create(array $anchor, array $payload): Funcionario;
 }

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Services;
+namespace App\Contracts;
 
 use App\Models\Funcionario;
 
 interface FuncionarioServiceInterface
 {
     /**
-     * Return a Funcionario model byt its cpf and its related data
+     * Return a Funcionario model by its cpf and its related data
      * @param string $cpf
      * @return Funcionario|null
      */
@@ -16,9 +16,8 @@ interface FuncionarioServiceInterface
     /**
      * Create a new Funcionario model and persist it
      * @param array $data
+     * @param ?array $dosesVacinaInfo
      * @return Funcionario
      */
-    public function create(array $data): Funcionario;
-
-
+    public function create(array $data, ?array $dosesVacinaInfo = []): Funcionario;
 }
