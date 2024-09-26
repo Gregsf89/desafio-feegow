@@ -15,7 +15,7 @@ class LoteVacinaRepository extends BaseRepository implements LoteVacinaRepositor
      */
     public function create(array $data): LoteVacina
     {
-        return LoteVacina::updateOrCreate($data, $data)->fresh();
+        return LoteVacina::firstOrCreate($data)->fresh();
     }
 
     /**
@@ -25,5 +25,15 @@ class LoteVacinaRepository extends BaseRepository implements LoteVacinaRepositor
     public function getAll(): Collection
     {
         return LoteVacina::all();
+    }
+
+    /**
+     * Return a LoteVacina model by its id
+     * @param string $id
+     * @return LoteVacina|null
+     */
+    public function getLoteVacinaById(string $id): ?LoteVacina
+    {
+        return LoteVacina::find($id);
     }
 }

@@ -7,6 +7,7 @@ use App\Contracts\LoteVacinaServiceInterface;
 use App\Models\LoteVacina;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Str;
 
 class LoteVacinaService extends BaseService implements LoteVacinaServiceInterface
 {
@@ -22,6 +23,7 @@ class LoteVacinaService extends BaseService implements LoteVacinaServiceInterfac
      */
     public function create(array $data): LoteVacina
     {
+        $data['id'] = strtoupper(Str::ulid());
         return $this->repositoryInterface->create($data);
     }
 
@@ -47,5 +49,15 @@ class LoteVacinaService extends BaseService implements LoteVacinaServiceInterfac
     public function getAll(): Collection
     {
         return $this->repositoryInterface->getAll();
+    }
+
+    /**
+     * Return a LoteVacina model by its id
+     * @param string $id
+     * @return LoteVacina|null
+     */
+    public function getLoteVacinaById(string $id): ?LoteVacina
+    {
+        return $this->repositoryInterface->getLoteVacinaById($id);
     }
 }

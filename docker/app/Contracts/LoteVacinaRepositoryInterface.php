@@ -19,4 +19,11 @@ interface LoteVacinaRepositoryInterface
      * @return \Illuminate\Database\Eloquent\Collection
      */
     public function getAll(): Collection;
+
+    /**
+     * Return a LoteVacina model by its id
+     * @param string $id
+     * @return LoteVacina|null
+     */
+    public function getLoteVacinaById(string $id): ?LoteVacina;
 }
