@@ -13,7 +13,9 @@ class DatabaseSeeder extends Seeder
     {
         $seeders = [
             TipoVacinaSeeder::class,
-            ComorbidadeSeeder::class
+            ComorbidadeSeeder::class,
+            FuncionarioSeeder::class,
+            LoteVacinaSeeder::class,
         ];
 
         $this->call($seeders);

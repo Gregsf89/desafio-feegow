@@ -14,7 +14,7 @@ RUN docker-php-ext-install gd
 
 WORKDIR /app
 COPY . /app
-RUN composer install
+
 RUN chmod 0644 /app/app.cron && crontab /app/app.cron
 RUN rm -d /app/.env 
 ENV APP_NAME=Laravel
@@ -56,9 +56,10 @@ ENV REDIS_PASSWORD=null
 ENV REDIS_PORT=6379
 ENV VITE_APP_NAME="${APP_NAME}"
 
+RUN composer install
+
 RUN touch /app/database/database.sqlite
 RUN php artisan migrate:fresh --seed
-RUN php artisan optmize:clear
 
 CMD php artisan serve --port=8000 --host=0.0.0.0
 

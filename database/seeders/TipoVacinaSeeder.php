@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\TipoVacina;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class TipoVacinaSeeder extends Seeder
