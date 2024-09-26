@@ -38,5 +38,6 @@ Com isso feito, agora exis dois caminhos para [rodar a aplicação](#instalaçã
 - por fim, utilize o comando `php artisan serve` para rodar a aplicação.
 
 ## Uso
+
 - em ambos os casos a aplicação estará disponível em `http://localhost:8000/` para interagir com a API através de um cliente HTTP.
 - no endpoint `http://localhost:8000/api/v1/documentation` você encontrará a documentação da API.
