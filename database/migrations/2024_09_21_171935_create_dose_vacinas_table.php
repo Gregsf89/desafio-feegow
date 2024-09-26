@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->dateTimeTz('data_aplicacao');
             $table->timestampsTz();
 
-            $table->unique(['funcionario_cpf', 'dose']);
+            $table->unique(['funcionario_cpf', 'dose', 'lote_vacina_id']);
             $table->foreign('funcionario_cpf')->references('cpf')->on('funcionarios')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreign('lote_vacina_id')->references('id')->on('lote_vacinas')->cascadeOnDelete()->cascadeOnUpdate();
         });

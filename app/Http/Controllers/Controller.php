@@ -51,4 +51,50 @@ abstract class Controller extends BaseController
         'mimetypes' => 'invalid_format',
         'unique' => 'value_not_unique'
     ];
+
+    /**
+     * @OA\Get(
+     *  path="/api/v1/commands/db-mass-populate/funcQnt/{func}/loteQnt/{lote}/doseQnt/dose",
+     *  parameters={{
+     *      "name": "func",
+     *      "in": "path",
+     *      "description": "quantity of Funcionarios to be created",
+     *      "required": true,
+     *      "schema": {
+     *      "type": "int"
+     *  }}},
+     *  parameters={{
+     *      "name": "lote",
+     *      "in": "path",
+     *      "description": "quantity of Lotes to be created",
+     *      "required": true,
+     *      "schema": {
+     *      "type": "int"
+     *  }}},
+     *  parameters={{
+     *      "name": "dose",
+     *      "in": "path",
+     *      "description": "quantity of Doses to be created",
+     *      "required": true,
+     *      "schema": {
+     *      "type": "int"
+     *  }}},
+     *  summary="GET Command db::mass-populate",
+     *  description="populates db with random data",
+     *  operationId="commands.db-mass-populate",
+     *  tags={"Commands"},
+     *  security={{"default": {}}},
+     *  @OA\Response(
+     *      response=200,
+     *      description="Command Response Body Data",
+     *      @OA\MediaType(
+     *          mediaType="application/json",
+     *          @OA\Schema(
+     *              @OA\Property(property="data", type="null", example=null),
+     *              @OA\Property(property="error", type="null", example=null)
+     *          )
+     *      )
+     *  ))
+     */
+    private static $placeholder;
 }

@@ -22,9 +22,7 @@ class DoseVacinaFactory extends Factory
             'funcionario_cpf' => Funcionario::factory()->create()->cpf,
             'lote_vacina_id' => LoteVacina::factory()->create()->id,
             'data_aplicacao' => $this->faker->dateTimeBetween('-3 years', 'now'),
-            'dose' => $this->faker->randomElement(['1', '2', '3']),
-            'created_at' => now(),
-            'updated_at' => now()
+            'dose' => $this->faker->randomElement(['1', '2', '3'])
         ];
     }
 }

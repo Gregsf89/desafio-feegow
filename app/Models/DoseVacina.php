@@ -17,6 +17,12 @@ class DoseVacina extends BaseModel
     protected $primaryKey = null;
 
     /**
+     * Indicates if the model's ID is auto-incrementing.
+     * @var bool
+     */
+    public $incrementing = false;
+
+    /**
      * attributes that are mass assignable
      * @var array
      */
