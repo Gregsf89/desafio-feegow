@@ -7,7 +7,6 @@ use App\Models\Funcionario;
 use App\Models\LoteVacina;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
-use Illuminate\Support\Str;
 
 class MassPopulateDatabaseJob implements ShouldQueue
 {
