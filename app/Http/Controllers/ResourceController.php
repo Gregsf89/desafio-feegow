@@ -44,7 +44,7 @@ class ResourceController extends Controller
      */
     public function getComorbidadeList(): array
     {
-        return \App\Models\Comorbidade::all()->toArray();
+        return \App\Models\Comorbidade::withoutRelations()->all()->toArray();
         return //ComorbidadeResource::collection(
             $this->comorbidadeServiceInterface->getAll();
         // );
