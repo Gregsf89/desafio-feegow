@@ -6,6 +6,7 @@ use App\Contracts\LoteVacinaRepositoryInterface;
 use App\Contracts\LoteVacinaServiceInterface;
 use App\Models\LoteVacina;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 
 class LoteVacinaService extends BaseService implements LoteVacinaServiceInterface
 {
@@ -37,5 +38,14 @@ class LoteVacinaService extends BaseService implements LoteVacinaServiceInterfac
         }
 
         return $doseVacinaInfo;
+    }
+
+    /**
+     * Return all LoteVacina models
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getAll(): Collection
+    {
+        return $this->repositoryInterface->getAll();
     }
 }

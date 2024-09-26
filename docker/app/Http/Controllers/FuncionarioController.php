@@ -19,7 +19,7 @@ class FuncionarioController extends Controller
 
     /**
      * @OA\Get(
-     *  path="/api/funcionario/{cpf}",
+     *  path="/api/v1/funcionario/{cpf}",
      *  parameters={{
      *      "name": "cpf",
      *      "in": "path",
@@ -69,7 +69,7 @@ class FuncionarioController extends Controller
 
     /**
      *  @OA\Post(
-     *  path="/api/funcionario",
+     *  path="/api/v1/funcionario",
      *  summary="POST Funcionario",
      *  description="create a funcionario",
      *  operationId="funcionario.createFuncionario",
@@ -150,7 +150,7 @@ class FuncionarioController extends Controller
 
     /**
      *  @OA\Patch(
-     *  path="/api/funcionario/{cpf}",
+     *  path="/api/v1/funcionario/{cpf}",
      *  parameters={{
      *      "name": "cpf",
      *      "in": "path",

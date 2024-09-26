@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 class FuncionarioResource extends JsonResource
 {
     /**
-     * reosurce wrap
+     * resource wrap
      * @var mixed
      */
     public static $wrap = 'funcionario_info';

@@ -3,6 +3,7 @@
 namespace App\Contracts;
 
 use App\Models\LoteVacina;
+use Illuminate\Database\Eloquent\Collection;
 
 interface LoteVacinaServiceInterface
 {
@@ -19,4 +20,10 @@ interface LoteVacinaServiceInterface
      * @return array
      */
     public function createLoteFromFuncionario(array $data): array;
+
+    /**
+     * Return all LoteVacina models
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getAll(): Collection;
 }
