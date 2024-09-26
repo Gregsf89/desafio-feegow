@@ -14,7 +14,7 @@ class ComorbidadeService extends BaseService implements ComorbidadeServiceInterf
 
     /**
      * Return all LoteVacina models
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @return array
      */
     public function getAll(): array
     {

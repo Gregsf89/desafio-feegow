@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Unit\Helpers;
 
 use App\Http\Helpers\CpfHelper;
 use Tests\TestCase;
