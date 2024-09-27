@@ -25,6 +25,7 @@ This application aims to meet the need to manage Funcionarios and their COVID Va
 
 ### 1. Using [Docker](https://docs.docker.com/get-started/) to run the application.
 - To do this, install [Docker](https://docs.docker.com/desktop/) on your computer.
+- In your terminal, navigate to the project root directory.
 - Use the command `docker build -t desafio-feegow .` in your terminal of choice.
 - Then use the command `docker run -p 8000:8000 desafio-feegow desafio-feegow` to run the application.
 
